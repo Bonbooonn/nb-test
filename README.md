@@ -30,11 +30,11 @@
   - docker exec -t php sh -c "cd /var/www/nb/notifications-service && ./vendor/bin/phpunit"
 
 ### Incase errors happening when executing commands(Windows)
-- docker exec -u 0 -t php sh -c "apt-get update && apt-get install -y dos2unix"
-- docker exec -t php sh -c "dos2unix /var/www/nb/users-service/bin/console"
-- docker exec -t php sh -c "dos2unix /var/www/nb/notifications-service/bin/console"
 - docker exec -u 0 -t php sh -c "chmod +x /var/www/nb/users-service/bin/console"
 - docker exec -u 0 -t php sh -c "chmod +x /var/www/nb/notifications-service/bin/console"
+- docker exec -u 0 -t php sh -c "apt-get update && apt-get install -y dos2unix" (Optional, only do this command if running the 2 commands above creates an error when running the bin/console commands)
+- docker exec -t php sh -c "dos2unix /var/www/nb/users-service/bin/console" (Optional, only do this command if running the 2 commands above creates an error when running the bin/console commands)
+- docker exec -t php sh -c "dos2unix /var/www/nb/notifications-service/bin/console" (Optional, only do this command if running the 2 commands above creates an error when running the bin/console commands)
 
 ### Virual Host
 - For windows
