@@ -1,0 +1,37 @@
+framework:
+    messenger:
+        # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
+        # failure_transport: 
+        
+        default_bus: command.bus
+
+        buses:
+            command.bus:
+
+        transports:
+          redis: 
+            dsn: 'redis://redis:6379/messages'
+            serializer: 'messenger.transport.symfony_serializer'
+            options:
+              stream: 'users.stream'
+              group: 'users.group'
+              delete_after_ack: false
+              delete_after_reject: false
+            # https://symfony.com/doc/current/messenger.html#transport-configuration
+          # async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            # failed: 'doctrine://default?queue_name=failed'
+          sync: 'sync://'
+
+        routing:
+          'App\Application\Event\*': redis
+            # Route your messages to the transports
+          # 'App\Application\Command\*': redis
+            # 'App\Application\Query\Get\*': redis
+
+# when@test:
+  #  framework:
+  #   messenger:
+  #     transports:
+  #       in_memory: 'in-memory:///'
+  #     routing:
+  #       '*': in_memory
