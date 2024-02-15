@@ -17,7 +17,7 @@
   - docker exec -it php sh -c "cd /var/www/nb/notifications-service && composer install"
 
 - To run docker migrations
-  - docker exec -t php sh -c "cd /var/www/nb/users-service && bin/console doctrine:migrations:migrate"
+  - docker exec -it php sh -c "cd /var/www/nb/users-service && bin/console doctrine:migrations:migrate"
 
 - To run consumer for notifications
   - docker exec -t php sh -c "cd /var/www/nb/notifications-service && bin/console messenger:consume redis"
@@ -28,6 +28,13 @@
 - To run Tests
   - docker exec -t php sh -c "cd /var/www/nb/users-service && ./vendor/bin/phpunit"
   - docker exec -t php sh -c "cd /var/www/nb/notifications-service && ./vendor/bin/phpunit"
+
+### Incase errors happening when executing commands(Windows)
+- docker exec -u 0 -t php sh -c "apt-get update && apt-get install -y dos2unix"
+- docker exec -t php sh -c "dos2unix /var/www/nb/users-service/bin/console"
+- docker exec -t php sh -c "dos2unix /var/www/nb/notifications-service/bin/console"
+- docker exec -u 0 -t php sh -c "chmod +x /var/www/nb/users-service/bin/console"
+- docker exec -u 0 -t php sh -c "chmod +x /var/www/nb/notifications-service/bin/console"
 
 ### Virual Host
 - For windows
