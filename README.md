@@ -12,12 +12,12 @@
 
 ### Docker
 
-- To run docker migrations
-  - docker exec -it php sh -c "cd /var/www/nb/users-service && bin/console doctrine:migrations:migrate"
-
 - To run composer installation
   - docker exec -it php sh -c "cd /var/www/nb/users-service && composer install"
   - docker exec -it php sh -c "cd /var/www/nb/notifications-service && composer install"
+
+- To run docker migrations
+  - docker exec -t php sh -c "cd /var/www/nb/users-service && bin/console doctrine:migrations:migrate"
 
 - To run consumer for notifications
   - docker exec -t php sh -c "cd /var/www/nb/notifications-service && bin/console messenger:consume redis"
